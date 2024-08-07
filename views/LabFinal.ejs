@@ -1,0 +1,57 @@
+<!-- views/calculator.ejs -->
+
+<form action="/calculator" method="post">
+    <label for="operand1">Operand 1:</label>
+    <input type="text" name="operand1" value="">
+  
+    <label for="operation">Operation:</label>
+    <select name="operation">
+        <option value="" disabled selected>Select an option</option>
+        <option value="add">+</option>
+        <option value="subtract">-</option>
+        <option value="multiply">x</option>
+        <option value="divide">/</option>
+    </select>
+  
+    <label for="operand2">Operand 2:</label>
+    <input type="text" name="operand2" value="">
+  
+    <button type="submit" >Calculate</button>
+</form>
+
+<% if (results && results.length > 0) { %>
+    <h2>Results</h2>
+    <table>
+        <tr>
+            <th>Operand 1</th>
+            <th>Operation</th>
+            <th>Operand 2</th>
+            <th>Result</th>
+        </tr>
+        <% results.forEach(result => { %>
+            <tr>
+                <td><%= result.operand1 %></td>
+                <td><%= result.operation %></td>
+                <td><%= result.operand2 %></td>
+                <td><%= result.result %></td>
+            </tr>
+        <% }) %>
+    </table>
+<% } %>
+
+<script>
+    function validateForm() {
+        var operand1 = document.getElementsByName("operand1")[0].value;
+        var operation = document.getElementsByName("operation")[0].value;
+        var operand2 = document.getElementsByName("operand2")[0].value;
+
+        if (!operand1 || !operation || !operand2) {
+            alert("Please fill in all fields before submitting.");
+            return false;
+        }
+
+        // You can add more specific validation logic if needed
+
+        return true;
+    }
+</script>
